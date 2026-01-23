@@ -32,8 +32,8 @@ book:
    # - 11-unsupervised.qmd
    # - 20-deeplearning.qmd
    # - 90-advanced.qmd
-   # - 95-exercises.qmd
-   # - 99-references.qmd
+    - 95-exercises.qmd
+    - 99-references.qmd
 
 bibliography:
     - references.bib
