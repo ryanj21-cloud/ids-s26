@@ -1,6 +1,6 @@
-# Homework {#sec-ex}
+# Homework {#sec-ex} 
 
-## Homework 1 (due 02/06)
+## Homework 1 (due 02/06) {#hw1}
 **Quarto and Git setup**:
 Quarto and Git are two important tools for data science: Quarto for 
 communicating results (reports/websites/books) and Git/GitHub for 
@@ -105,7 +105,7 @@ Render the homework into a HTML. Print the HTML file to a pdf file and put the f
 
 
 
-## Homework 2 (due 02/13)
+## Homework 2 (due 02/13) {#hw2}
 
 
 ### Part 1. **Contributing to the Class Notes**
