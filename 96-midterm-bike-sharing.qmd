@@ -1,16 +1,4 @@
----
-title: "STAT 3255 — Take-Home Midterm Exam"
-author: "Kun Chen"
-format:
-  html:
-    toc: true
-    number-sections: true
-    code-fold: false
-execute:
-  echo: true
-  warning: false
-  message: false
----
+# Take-Home Midterm Exam {#sec-midterm}
 
 ## Overview
 
