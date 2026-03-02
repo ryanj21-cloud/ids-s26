@@ -1,6 +1,8 @@
 ---
 title: "Data Science in Animation"
-format: html
+format: 
+    html:
+        embed-resources: true
 execute:
     enabled: true
     include: true
