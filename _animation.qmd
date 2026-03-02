@@ -1,16 +1,12 @@
 ---
 title: "Data Science in Animation"
 format: html
+metadata:
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
 ---
-project:
-  type: default
-
-execute:
-  enabled: true
-
-jupyter: python3
-
-
 
 ## Data Science in Animation  
 ### Statistical Methods Behind Animation  
