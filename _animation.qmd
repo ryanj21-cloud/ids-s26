@@ -1,6 +1,9 @@
 ---
 title: "Data Science in Animation"
 format: html
+execute:
+    enabled: true
+    include: true
 metadata:
   document-css: false
   link-citations: true
