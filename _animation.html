@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>animation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="_animation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="_animation_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="_animation_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="_animation_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="_animation_files/libs/quarto-html/popper.min.js"></script>
+<script src="_animation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="_animation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="_animation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="_animation_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="_animation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="_animation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="_animation_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Science in Animation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="statistical-methods-behind-animation" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-methods-behind-animation">Statistical Methods Behind Animation</h3>
+<p>This presentation was prepared by Ryan Jiang.</p>
+<hr>
+</section>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<section id="why-study-animation-through-statistics" class="level4">
+<h4 class="anchored" data-anchor-id="why-study-animation-through-statistics">Why Study Animation Through Statistics?</h4>
+<ul>
+<li><p>Modern animation is not simply digital drawing; it is the result of large-scale statistical estimation and computational modeling.</p></li>
+<li><p>Behind every realistic animated film are mathematical models that simulate light transport, physical motion, and learned patterns from data.</p></li>
+<li><p>Although audiences see characters and stories, what powers those visuals are integrals, optimization problems, and probabilistic algorithms.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="mathematical-foundation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-foundation">Mathematical Foundation</h3>
+<section id="the-rendering-equation" class="level4">
+<h4 class="anchored" data-anchor-id="the-rendering-equation">The Rendering Equation</h4>
+<ul>
+<li>The rendering equation models how light leaves a surface by combining emitted light and reflected incoming light.</li>
+</ul>
+<p><span class="math display">\[
+L_o(x, \omega_o) =
+L_e(x, \omega_o)
++
+\int_{\Omega}
+f_r(x, \omega_i, \omega_o)
+L_i(x, \omega_i)
+(\omega_i \cdot n)
+d\omega_i
+\]</span></p>
+<ul>
+<li><p>This equation conceptually says that outgoing light equals emitted light plus reflected incoming light.</p></li>
+<li><p>The integral term means we are summing contributions from all possible incoming directions.</p></li>
+<li><p>Because it is recursive and high-dimensional, it cannot be solved analytically for complex scenes since light bounces multiple times.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="computational-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="computational-challenge">Computational Challenge</h3>
+<section id="why-exact-solutions-are-infeasible" class="level4">
+<h4 class="anchored" data-anchor-id="why-exact-solutions-are-infeasible">Why exact solutions are infeasible</h4>
+<ul>
+<li><p>Real scenes involve many light bounces, and each bounce adds more complexity because light transport is recursive.</p></li>
+<li><p>Because of this recursion and the dimensionality of the integral, exact analytical solutions are impossible for complex environments.</p></li>
+<li><p>Because of this, studios rarely compute exact solutions and instead rely on estimation.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="statistical-solution" class="level3">
+<h3 class="anchored">Statistical Solution</h3>
+<section id="monte-carlo-estimation-in-rendering" class="level4">
+<h4 class="anchored" data-anchor-id="monte-carlo-estimation-in-rendering">Monte Carlo estimation in rendering</h4>
+<ul>
+<li><p>Monte Carlo methods approximate integrals by sampling random directions and averaging the results.</p></li>
+<li><p>In rendering, this becomes an estimator of outgoing radiance based on randomly sampled light paths.</p></li>
+<li><p>By the Law of Large Numbers, this estimator converges as sample size increases. However, finite sampling introduces variance — and in animation, that variance appears visually as noise..</p></li>
+</ul>
+</section>
+<section id="monte-carlo-convergence-integral-estimation" class="level4">
+<h4 class="anchored">Monte Carlo convergence (integral estimation)</h4>
+<p>This demo estimates (_0^1 x^2,dx = 1/3), illustrating how random sampling approximates an integral.</p>
+<div id="1259aa2f" class="cell" data-fig-height="4.2" data-fig-width="7" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="_animation_files/figure-html/cell-2-output-1.png" width="608" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>As shown, when the sample size is small, the estimate fluctuates but as the sample size increases, the estimate stabilizes around the true value.</p></li>
+<li><h2 id="this-is-exactly-what-happens-in-rendering-more-samples-per-pixel-reduce-variability-and-produce-smoother-images." class="anchored" data-anchor-id="monte-carlo-convergence-integral-estimation">This is exactly what happens in rendering: more samples per pixel reduce variability and produce smoother images.</h2></li>
+</ul>
+</section>
+<section id="variance-reduction-and-noise-analogy" class="level4">
+<h4 class="anchored" data-anchor-id="variance-reduction-and-noise-analogy">Variance reduction and noise analogy</h4>
+<p>This boxplot shows how estimator variability shrinks as sample size increases.</p>
+<div id="29ad6eb6" class="cell" data-fig-height="4.2" data-fig-width="7" data-execution_count="2">
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/f1/kfvqq7cn4190llcxlmwhnjb40000gn/T/ipykernel_13303/830686255.py:18: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([trial_estimates[n] for n in sample_sizes], labels=[str(n) for n in sample_sizes])</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="_animation_files/figure-html/cell-3-output-2.png" width="597" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>As shown on the plot, with only 20 samples, the estimates vary widely, but as samples increase, the distribution tightens around the true value of 1/3.</p></li>
+<li><p>This shrinking spread represents decreasing variance, which in animation, corresponds to less visual noise.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="physics-based-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="physics-based-simulation">Physics-Based Simulation</h3>
+<section id="modeling-motion-and-natural-phenomena" class="level4">
+<h4 class="anchored" data-anchor-id="modeling-motion-and-natural-phenomena">Modeling motion and natural phenomena</h4>
+<ul>
+<li>To animate cloth, hair, water, and smoke realistically, studios solve systems of differential equations numerically, like Newton’s second law:</li>
+</ul>
+<p>[ F = m a ]</p>
+<ul>
+<li><p>Acceleration is computed from forces such as gravity, tension, collision, and air resistance.</p></li>
+<li><p>These continuous equations are approximated numerically using time-stepping algorithms.</p></li>
+<li><p>If velocity changes over time, we approximate position updates using:</p></li>
+</ul>
+<p>[ x_{t+1} = x_t + v_t t ]</p>
+<ul>
+<li><p>Small time steps increase accuracy but increase computational cost.</p></li>
+<li><p>Large time steps reduce cost but increase numerical error.</p></li>
+<li><p>Numerical methods introduce discretization error, so step size and computational cost must be balanced.</p></li>
+<li><p>Some systems incorporate randomness to simulate chaotic effects such as:</p>
+<ul>
+<li>Smoke</li>
+<li>Fire</li>
+<li>Debris</li>
+<li>Particle systems</li>
+</ul></li>
+<li><p>Random forces are often drawn from probability distributions to mimic natural variation.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="optimization-at-scale" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-at-scale">Optimization at Scale</h3>
+<section id="efficiency-as-a-constrained-problem" class="level4">
+<h4 class="anchored" data-anchor-id="efficiency-as-a-constrained-problem">Efficiency as a constrained problem</h4>
+<ul>
+<li><p>Rendering a single film may require millions of CPU hours.</p></li>
+<li><p>Studios frame rendering as an optimization problem, minimizing variance subject to time and hardware constraints.</p></li>
+<li><p>Techniques such as importance sampling and adaptive sampling allocate computational effort efficiently.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="machine-learning-in-animation" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning-in-animation">Machine Learning in Animation</h3>
+<section id="learning-motion-from-data" class="level4">
+<h4 class="anchored" data-anchor-id="learning-motion-from-data">Learning motion from data</h4>
+<ul>
+<li><p>Motion capture produces high-dimensional time series data that often contain noise and missing measurements.</p>
+<ul>
+<li><p>Each frame of motion capture contains dozens of joint positions.</p></li>
+<li><p>Over time, this produces high-dimensional time series data.</p></li>
+<li><p>Noise, missing markers, and sensor errors require statistical smoothing.</p></li>
+</ul></li>
+<li><p>Neural networks are trained to smooth motion and predict realistic joint trajectories.</p></li>
+<li><p>Machine learning models predict future joint positions using regression:</p></li>
+</ul>
+<p>[ = f_(x) ]</p>
+<ul>
+<li><p>Where parameters ( ) are learned by minimizing a loss function.</p></li>
+<li><p>Training involves minimizing a loss function through gradient-based optimization.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="generative-ai" class="level3">
+<h3 class="anchored" data-anchor-id="generative-ai">Generative AI</h3>
+<section id="diffusion-models" class="level4">
+<h4 class="anchored" data-anchor-id="diffusion-models">Diffusion models</h4>
+<ul>
+<li><p>Diffusion models generate images by learning to reverse a gradual noising process.</p></li>
+<li><p>These systems approximate high-dimensional probability distributions over images.</p></li>
+<li><p>They enable AI-assisted animation tools, frame interpolation, and visual synthesis.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<section id="animation-as-applied-data-science" class="level4">
+<h4 class="anchored" data-anchor-id="animation-as-applied-data-science">Animation as Applied Data Science</h4>
+<ul>
+<li><p>Modern animation represents a collaboration between artists, engineers, statisticians, and data scientists.</p></li>
+<li><p>What appears on screen is the result of probabilistic modeling, optimization, and computational simulation.</p></li>
+<li><p>In this sense, digital storytelling is fundamentally powered by statistical methods.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="works-cited" class="level2">
+<h2 class="anchored" data-anchor-id="works-cited">Works Cited</h2>
+<p><strong>Kajiya, J. (1986).</strong> <em>The Rendering Equation.</em> SIGGRAPH.<br>
+https://dl.acm.org/doi/10.1145/15922.15902<br>
+This foundational paper introduced the rendering equation, which models light transport in computer graphics.</p>
+<p><strong>Pharr, M., Jakob, W., &amp; Humphreys, G. (2023).</strong> <em>Physically Based Rendering: From Theory to Implementation.</em> MIT Press.<br>
+https://pbr-book.org/<br>
+This book provides a comprehensive explanation of Monte Carlo rendering techniques used in modern animation.</p>
+<p><strong>Akenine-Möller, T., Haines, E., &amp; Hoffman, N. (2018).</strong> <em>Real-Time Rendering, Fourth Edition.</em> AK Peters/CRC Press. https://www.realtimerendering.com/ This resource offers in-depth coverage of rendering algorithms, sampling techniques, and performance-oriented graphics methods relevant to animation.</p>
+<p><strong>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016).</strong> <em>Deep Learning.</em> MIT Press.<br>
+https://www.deeplearningbook.org/<br>
+This foundational book explains neural networks and optimization methods used in motion modeling and AI-driven animation.</p>
+<p><strong>Rombach, R., et al.&nbsp;(2022).</strong> <em>High-Resolution Image Synthesis with Latent Diffusion Models.</em> CVPR.<br>
+https://arxiv.org/abs/2112.10752<br>
+This paper introduces diffusion-based generative models used in modern AI-assisted animation tools.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
