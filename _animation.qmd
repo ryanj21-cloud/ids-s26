@@ -1,3 +1,7 @@
+---
+title: "Data Science in Animation"
+format: html
+---
 project:
   type: default
 
@@ -5,6 +9,9 @@ execute:
   enabled: true
 
 jupyter: python3
+
+
+
 ## Data Science in Animation  
 ### Statistical Methods Behind Animation  
 
