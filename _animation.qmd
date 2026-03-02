@@ -1,3 +1,10 @@
+project:
+  type: default
+
+execute:
+  enabled: true
+
+jupyter: python3
 ## Data Science in Animation  
 ### Statistical Methods Behind Animation  
 
@@ -123,7 +130,7 @@ for n in sample_sizes:
         vals.append(np.mean(x**2))
     trial_estimates[n] = np.array(vals)
 
-plt.boxplot([trial_estimates[n] for n in sample_sizes], labels=[str(n) for n in sample_sizes])
+plt.boxplot([trial_estimates[n] for n in sample_sizes], tick_labels=[str(n) for n in sample_sizes])
 plt.axhline(true_val, linestyle='--', label="True value = 1/3")
 plt.xlabel("Samples per estimate (n)")
 plt.ylabel("Estimate distribution")
